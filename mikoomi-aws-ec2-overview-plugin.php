@@ -294,7 +294,18 @@ function EC2_DescribeInstances($creds)
                                 'm2.2xlarge'=> 0,
                                 'm2.4xlarge'=> 0,
                                 'm2.xlarge'=> 0,
-                                't1.micro'=> 0
+                                't1.micro'=> 0,
+                                'm3.xlarge'=> 0,
+                                'm3.2xlarge'=> 0,
+                                'cc2.8xlarge'=> 0,
+                                'cr1.8xlarge'=> 0,
+                                'hi1.4xlarge'=> 0,
+                                'hs1.8xlarge'=> 0,
+                                'c3.large'=> 0,
+                                'c3.xlarge'=> 0,
+                                'c3.2xlarge'=> 0,
+                                'c3.4xlarge'=> 0,
+                                'c3.8xlarge'=> 0,
                                 ) ;
    
    $monitoring_status_array = array( 'enabled'=> 0,
