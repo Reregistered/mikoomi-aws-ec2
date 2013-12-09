@@ -357,7 +357,7 @@ function EC2_DescribeInstances($creds)
                       $monitoring_status_array["$instance_monitoring_status"]++ ;
                    }
    
-                   $instance_state_reason = $instance->stateReason->message ;
+                   $instance_state_reason = $instance->stateReason->code ;
                    if (!empty($instance_state_reason)) {
                       $instance_state_reason_array["$instance_state_reason"]++ ;
                    }
@@ -670,7 +670,11 @@ function EC2_DescribeReservedInstances($creds)
       }
       foreach ($reservedInstancesSet->item as $item) {
          $instanceType = strtolower($item->instanceType) ;
-         $reserved_instance_count_array["$instanceType"]++ ;
+         if (array_key_exists('$instanceType', $reserved_instance_count_array)) {
+           $reserved_instance_count_array["$instanceType"]++ ;
+         } else {
+           $reserved_instance_count_array["$instanceType"] = 1; 
+         }
       }
    }
    
@@ -843,9 +847,10 @@ function EC2_DescribeVolumes($creds)
                        }
    
                        $attachment_status = $attachmentSet->item->status ;
-   
-                       $volume_attachment_status_array["$attachment_status"]["Volumes_${attachment_status}"]++  ;
-                       $volume_attachment_status_array["$attachment_status"]["total_${attachment_status}_Total_Size_GB"] += $volume_size  ;
+                       if ($attachment_status){
+                         $volume_attachment_status_array["$attachment_status"]["Volumes_${attachment_status}"]++  ;
+                         $volume_attachment_status_array["$attachment_status"]["Volumes_${attachment_status}_Total_Size_GB"] += $volume_size  ;                       
+                       }   
                }
    
       }
